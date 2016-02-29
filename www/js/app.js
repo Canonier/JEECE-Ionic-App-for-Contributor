@@ -1,10 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('jeece-mission-app', ['ionic', 'jeece-mission-app.controllers', 'jeece-mission-app.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,6 +16,41 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 })
 
+.directive('toggleClass', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                element.toggleClass(attrs.toggleClass);
+            });
+        }
+    };
+})
+
+.directive('ng-click-outside', ['$document', function ($document) {
+    return {
+        link: function postLink(scope, element, attrs) {
+            alert('yolo');
+            var onClick = function (event) {
+                var isChild = $(element).has(event.target).length > 0;
+                var isSelf = element[0] == event.target;
+                var isInside = isChild || isSelf;
+                if (!isInside) {
+                    scope.$apply(attrs.clickAnywhereButHere);
+                }
+            };
+            scope.$watch(attrs.isActive, function(newValue, oldValue) {
+                if (newValue !== oldValue && newValue === true) {
+                    $document.bind('click', onClick);
+                }
+                else if (newValue !== oldValue && newValue === false) {
+                    $document.unbind('click', onClick);
+                }
+            });
+        }
+    };
+}])
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -32,42 +61,34 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.home', {
+    url: '/home',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/home.html'
       }
     }
   })
 
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.mission', {
+    url: '/mission/{id:int}',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/mission.html',
+        controller: 'AppCtrl'
       }
     }
-  });
+  })
+
+  .state('app.news', {
+    url: '/news',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/news.html',
+      }
+    }
+  })
+;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/home');
 });

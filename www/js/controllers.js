@@ -1,56 +1,58 @@
-angular.module('starter.controllers', [])
+angular.module('jeece-mission-app.controllers', ['ionic'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate) {
+  // Si on chope la var "data" dans le stateParams on le fou dans le scope "data".
+  $scope.data = angular.fromJson($stateParams.data);
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  // Ce que l'API devra nous fournir
+  $scope.missions = [
+    { "name" : "PAREX01", "id" : "1", "profiles" : [
+      {"id": "1", "img" : "http://lorempixel.com/200/200/people/1", "show":"true"},
+      {"id": "5", "img" : "http://lorempixel.com/200/200/people/2", "show":"false"}
+    ], "progress" : {"theory" : "10", "lab" : "39"}, "phase" : { "total":"10", "current":"2", "currentName":"Integration HTML/CSS/JS.", "list":[] } },
 
-  // Form data for the login modal
-  $scope.loginData = {};
+    { "name" : "GUILL01", "id" : "2", "profiles" : [
+      {"id": "6", "img" : "http://lorempixel.com/200/200/people/3"},
+      {"id": "2", "img" : "http://lorempixel.com/200/200/people/4"},
+      {"id": "9", "img" : "http://lorempixel.com/200/200/people/1"}
+    ], "progress" : {"theory" : "58", "lab" : "7"}, "phase" : { "total":"12", "current":"7", "currentName":"Traduction des paragraphes 5 à 7." } },
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+    { "name" : "PAREX02", "id" : "3", "profiles" : [
+      {"id": "3", "img" : "http://lorempixel.com/200/200/people/5"}
+    ], "progress" : {"theory" : "29", "lab" : "90"}, "phase" : { "total":"3", "current":"1", "currentName":"Phase d'analyse" } },
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
+    { "name" : "AUGUS03", "id" : "4", "profiles" : [
+      {"id": "5", "img" : "http://lorempixel.com/200/200/people/6"},
+      {"id": "6", "img" : "http://lorempixel.com/200/200/people/1"},
+      {"id": "2", "img" : "http://lorempixel.com/200/200/people/3"},
+      {"id": "9", "img" : "http://lorempixel.com/200/200/people/7"}
+    ], "progress" : {"theory" : "100", "lab" : "70"}, "phase" : { "total":"9", "current":"3", "currentName":"Réalisation du prototype de la partie laser" } },
 
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-})
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+    { "name" : "PASTE01", "id" : "5", "profiles" : [
+      {"id": "5", "img" : "http://lorempixel.com/200/200/people/9"},
+      {"id": "2", "img" : "http://lorempixel.com/200/200/people/4"}
+    ], "progress" : {"theory" : "100", "lab" : "100"}, "phase" : { "total":"9", "current":"9", "currentName":"Test" } }
   ];
-})
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+  // quand on swipe l'element, ca passe a la page suivante avec l'id en parametre
+  $scope.showMission = function(missionId){
+    $scope.mission = $scope.missions[missionId - 1];
+    $state.go('app.mission', {"id":missionId-1});
+  };
+
+  $scope.showHide = function(item){
+    console.log(item);
+  };
+
+  $scope.myClass = false;
+  $scope.toggleClass = function(){
+    $scope.myClass = !$scope.myClass;
+  };
+
+  $scope.resetClass = function(){
+    alert('coucou');
+    angular.element.find('.show');
+  };
+
+
 });

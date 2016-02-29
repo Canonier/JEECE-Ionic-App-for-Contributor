@@ -1,1 +1,205 @@
-/* Empty. Add your own CSS if you like */
+
+.body{
+	background-color: #333;
+	color:white;
+	padding: 3vh 5vw;
+}
+
+/* menu */
+.menu{
+	background-color: #efefef;
+	box-shadow: 0 0 5px black;
+}
+
+/* Définition des titres */
+h1, h2, h3, h4, h5, h6{ color:#ddd; }
+h2.name{ 
+	color:#333; 
+	text-align: center;
+	font-size: 6vw;
+	margin: 10px 0 20px;
+	text-transform: uppercase;
+	font-weight: lighter;
+}
+
+/* style lien */
+a{ text-decoration: none; }
+
+/* paragraphe */
+.section h4, .phases h4{ margin-top: 40px; padding-left: 20px; }
+.section p{
+	text-align: justify;
+	padding: 10px 20px;
+	margin-top: 0px;
+	background-color: #eee;
+	color:#111111;
+}
+
+
+/* Logo */
+img.headWhite{
+	display: block;
+	max-height: 10vh;
+	margin:0 auto 5vh;
+}
+
+/* bar */
+.theorique-bar, .pratique-bar{
+	position:absolute;
+	height: 1px;
+	left:0;
+	bottom:0;
+}
+.theorique-bar{
+	background-color: red;
+}
+.pratique-bar{
+	background-color: rgb(35, 131, 1);
+}
+
+/* list */
+.menu .list{
+	border-top: 1px dashed green;
+	border-bottom: 1px dashed green;
+	background-color: rgba(0,0,0,0);
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 10px;
+}
+.menu .list .item, .menu .list .item a{
+	background-color: rgba(0,0,0,0);
+	border-top: none;
+	border-right: none;
+	border-left: none;
+}
+.menu .list .item:active, .menu .list .item a:active{
+	background-color: rgba(0,0,0,0.1);
+}
+.menu .list .item:nth-last-child(1), .menu .list .item a:nth-last-child(1){
+	border-bottom: 0;
+}
+.menu .list .item i, .menu .list .item a i{
+	color: green;
+	font-size: 20px;
+}
+
+.attached-list{
+	display: inline;
+	margin-right:10px; 
+	position: relative;
+	transition:0.2s;
+}
+.attached-list.show{
+	margin-right:160px; 
+	transition:0.2s;
+}
+
+.profil-action{
+	position: absolute;
+	width: 180px;
+	font-size: 30px;
+	height: 60px;
+	line-height: 60px;
+	padding-left: 10px;
+	vertical-align: top;
+	display: inline;
+	opacity: 0;
+	transition: opacity 0.2s;
+	border: 2px white solid;
+	border-left: 0;
+	left:31px;
+	padding-left: 45px;
+	border-radius: 0 30px 30px 0;  
+	overflow: hidden;
+}
+
+.attached-list.show .profil-action{
+	opacity: 1;
+	transition:0.2s;
+}
+.profil-action a{
+	color: green;
+	margin: 0 15px 0 0;
+}
+
+.profiles-icon{
+	width:150vw;
+	height: 60px;
+	overflow: hidden;
+}
+
+/* cards */
+.card{ display: block; margin:15px 0; position: relative; }
+.card .number{ display: inline-block; width:10%; line-height: 13px; vertical-align: middle; font-size: 10px; }
+.card .phase{ display: inline-block; width:88%; line-height: 13px; vertical-align: middle; }
+
+/* pictures */
+img.profil, .img.profil{
+	display: inline-block;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center;
+	background-color: white;
+}
+.profiles{
+	position: absolute;
+	text-align: right;
+	padding:2px 5px 0 0;
+	width: 100%;
+	top:0; left:0;
+}
+.attached{
+	width:60px;
+	display: inline-block!important;
+	border: 2px white solid;
+}
+.card img.profil{ 
+	position: relative;
+	top:0;
+	max-height: 20px;
+	margin:3px 2px;
+}
+.menu .img.profil{
+	display: block;
+	border: 5px rgb(39, 131, 1) solid;
+	box-shadow: 0 0 2px black;
+	margin: 0 auto 0;
+	width: 35vw;
+	height: 35vw;
+}
+
+/* slider */
+.news{ padding: 0!important; }
+.slider{
+	padding:0 0 50px;
+	margin: 0;
+	min-height: 95vh;
+}
+.slider .card{
+	margin: 10px;
+	padding: 0!important;
+}
+.slider .card img{
+	width:100%;
+}
+
+/* footer */
+.footer{
+	background: none;
+}
+.footer img{
+	/*display: block;*/
+	/*position: absolute;*/
+	/*bottom:0;*/
+	max-height: 9vw;
+	display: block;
+	margin: auto;
+}
+
+
+
+
+
+.coucou{
+	color:red!important;
+}
