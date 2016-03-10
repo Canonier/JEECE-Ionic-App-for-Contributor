@@ -1,6 +1,6 @@
 angular.module('jeece-mission-app.controllers', ['ionic'])
 
-.controller('AppCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate) {
+.controller('AppCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $http) {
   // Si on chope la var "data" dans le stateParams on le fou dans le scope "data".
   $scope.data = angular.fromJson($stateParams.data);
 
@@ -53,6 +53,25 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
     alert('coucou');
     angular.element.find('.show');
   };
+
+
+  $http({
+  method: 'GET',
+  url: 'http://dev.jeece.fr:6009/api/skills'
+}).then(function(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    console.log(response.data);
+    $scope.competences=response.data;
+
+
+  }, function(response) {
+
+    console.log("ça marche pas");
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+  });
+
 
 
 });

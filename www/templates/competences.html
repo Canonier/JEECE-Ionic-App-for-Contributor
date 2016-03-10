@@ -1,1 +1,11 @@
-<ion
+<ion-view>
+  <ion-content class="body">
+    <h1>Mes Compétences</h1>
+    <ion-list class="competences-list">
+    <ion-item class="card card-competences" ng-repeat="competence in competences">
+    {{competence.name}}
+    </ion-item>
+    </ion-list>
+    <button  class="button button-balanced">Ajouter une Competences v2</button>
+  </ion-content>
+</ion-view>

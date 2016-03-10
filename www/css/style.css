@@ -13,8 +13,8 @@
 
 /* Définition des titres */
 h1, h2, h3, h4, h5, h6{ color:#ddd; }
-h2.name{ 
-	color:#333; 
+h2.name{
+	color:#333;
 	text-align: center;
 	font-size: 6vw;
 	margin: 10px 0 20px;
@@ -85,12 +85,12 @@ img.headWhite{
 
 .attached-list{
 	display: inline;
-	margin-right:10px; 
+	margin-right:10px;
 	position: relative;
 	transition:0.2s;
 }
 .attached-list.show{
-	margin-right:160px; 
+	margin-right:160px;
 	transition:0.2s;
 }
 
@@ -109,7 +109,7 @@ img.headWhite{
 	border-left: 0;
 	left:31px;
 	padding-left: 45px;
-	border-radius: 0 30px 30px 0;  
+	border-radius: 0 30px 30px 0;
 	overflow: hidden;
 }
 
@@ -153,7 +153,7 @@ img.profil, .img.profil{
 	display: inline-block!important;
 	border: 2px white solid;
 }
-.card img.profil{ 
+.card img.profil{
 	position: relative;
 	top:0;
 	max-height: 20px;
@@ -196,6 +196,15 @@ img.profil, .img.profil{
 	margin: auto;
 }
 
+.card-competences{
+ height: 10vh;
+ margin-top: 0vh;
+margin-bottom: 0vh;
+}
+
+.competences-list{
+	margin-top: 10vh;
+}
 
 
 
