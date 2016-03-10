@@ -55,4 +55,16 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
   };
 
 
+})
+
+.controller('missionsCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $http){
+  $scope.missionsList;
+  $http({
+    method: 'GET',
+    url: 'http://dev.jeece.fr:6009/api/missions'
+  }).then(function(response) {
+    $scope.missionsList = response.data;
+  }, function(response) {
+    alert("problem de get lors du GET")
+  });
 });

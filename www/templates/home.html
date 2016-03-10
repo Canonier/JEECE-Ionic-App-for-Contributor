@@ -1,35 +1,35 @@
 <ion-view>
   <ion-content class="body">
 
-<div class="h20">
-	<img src="/img/logo_blanc.png" class="headWhite">
-</div>
+    <div class="h20">
+    	<img src="/img/logo_blanc.png" class="headWhite">
+    </div>
 
-<div>
-	<h4>Missions en cours</h4>
-</div>
+    <div>
+    	<h4>Missions en cours</h4>
+    </div>
 
-<div ng-click="showMission({{mission.id}})" class="card" ng-repeat="mission in missions">
-  <!-- Head -->
-  <div class="item item-divider" style="position:relative;">
-  	<!-- titre -->
-  	<span style="position:absolute; top:6px;" ng-bind="mission.name"></span>
-  	<!-- profil icon -->
-  	<div class="profiles">
-		<img class="profil" ng-repeat="profile in mission.profiles" ng-src="{{profile.img}}">
-	</div>
-	<!-- bar -->
-  	<div class="theorique-bar" style="width:{{mission.progress.theory}}%"></div>
-  	<div class="pratique-bar" style="width:{{mission.progress.lab}}%"></div>
-  </div>
-  <!-- content -->
-  <div class="item item-text-wrap">
-  		<div class="number">
-  			<span ng-bind="mission.phase.current"></span>/<span ng-bind="mission.phase.total"></span>
-  		</div>
-		<p class="phase" ng-bind="mission.phase.currentName"></p>
-  </div>
-</div>
+    <div ng-click="showMission({{mission.id}})" class="card" ng-repeat="mission in missions">
+      <!-- Head -->
+      <div class="item item-divider" style="position:relative;">
+      	<!-- titre -->
+      	<span style="position:absolute; top:6px;" ng-bind="mission.name"></span>
+      	<!-- profil icon -->
+      	<div class="profiles">
+    		<img class="profil" ng-repeat="profile in mission.profiles" ng-src="{{profile.img}}">
+    	</div>
+    	<!-- bar -->
+      	<div class="theorique-bar" style="width:{{mission.progress.theory}}%"></div>
+      	<div class="pratique-bar" style="width:{{mission.progress.lab}}%"></div>
+      </div>
+      <!-- content -->
+      <div class="item item-text-wrap">
+      		<div class="number">
+      			<span ng-bind="mission.phase.current"></span>/<span ng-bind="mission.phase.total"></span>
+      		</div>
+    		<p class="phase" ng-bind="mission.phase.currentName"></p>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>
