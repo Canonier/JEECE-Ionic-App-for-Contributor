@@ -67,4 +67,16 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
   }, function(response) {
     alert("problem de get lors du GET")
   });
+})
+
+
+
+.controller('skillsCtrl',function($scope,$http,$stateParams, $state, $ionicGesture, $ionicSideMenuDelegate){
+  $http({
+    method: 'GET',
+    url: 'http://dev.jeece.fr:6009/api/skills'
+  }).then(function(response) {
+    console.log(response.data);
+    $scope.skills=response.data;
+  })
 });
