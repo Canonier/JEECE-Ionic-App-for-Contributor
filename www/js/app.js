@@ -88,6 +88,17 @@ angular.module('jeece-mission-app', ['ionic', 'jeece-mission-app.controllers', '
       }
     }
   })
+
+
+  .state('app.skills', {
+    url: '/skills',
+    views: {
+      'menuContent': {
+        templateUrl:'templates/skills.html',
+        controller:"skillsCtrl"
+      }
+    }
+  })
 ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
