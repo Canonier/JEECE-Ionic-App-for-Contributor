@@ -70,11 +70,11 @@ angular.module('jeece-mission-app', ['ionic', 'jeece-mission-app.controllers', '
     }
   })
 
-  .state('app.missions', {
-    url: '/missions',
+  .state('app.offers', {
+    url: '/offers',
     views: {
       'menuContent': {
-        templateUrl: 'templates/missions.html',
+        templateUrl: 'templates/offers.html',
         controller: 'missionsCtrl'
       }
     }
@@ -90,5 +90,5 @@ angular.module('jeece-mission-app', ['ionic', 'jeece-mission-app.controllers', '
   })
 ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/missions');
+  $urlRouterProvider.otherwise('/app/home');
 });
