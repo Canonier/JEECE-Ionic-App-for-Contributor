@@ -75,6 +75,16 @@ angular.module('jeece-mission-app', ['ionic', 'jeece-mission-app.controllers', '
     views: {
       'menuContent': {
         templateUrl: 'templates/offers.html',
+        controller: 'offersCtrl'
+      }
+    }
+  })
+
+  .state('app.mission', {
+    url: '/mission/{id:int}',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/mission.html',
         controller: 'missionsCtrl'
       }
     }

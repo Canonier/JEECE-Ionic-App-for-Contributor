@@ -1,0 +1,65 @@
+<ion-view>
+  <ion-content class="body">
+
+  <div style="position:relative;">
+
+    <span><h1 style="display:inline" ng-bind="mission.ref"></h1><span ng-click="toggleDescription()" class="infoButton"><i class="icon ion-information-circled"></i></span></span>
+    <div class="description" id="description">
+      <span ng-bind="mission.description"></span>
+  </div>
+  <!--<span><h1 style="display:inline" ng-bind="mission.name"></h1><span slide-toggle="#description" class="infoButton"><i class="icon ion-information-circled"></i></span></span>
+  </div>
+  
+  <div class="slideable" id="description">
+    	Présentation de la mission. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tortor ligula, fermentum nec eleifend eget, venenatis sit amet ex. Fusce tempus lacus ex, a consequat nisl consectetur ut. Maecenas leo sapien, tincidunt ut varius vitae, auctor sed elit. Praesent ac purus blandit, pretium diam vel, porta nisi.
+	</div>-->
+
+  <!--Bloc pour la phase actuelle-->
+  <div class="list list-inset currentPhase" ng-click="showPhaseDescription(currentPhase.id)">
+    <div class="item item-icon-right"> 
+      <div id="currentPhase">
+        <span style="position:absolute; font-weight: bold;" ng-bind="currentPhase.name"></span> <br/>
+        <hr width="100%" color="rgb(39, 131, 1)" size="2px"> 
+        <p class="phaseDescription" ng-bind="currentPhase.description"></p>
+      </div>
+      <i class="icon ion-clock"></i>
+    </div>
+  </div>
+
+  <!--Side-slider des intervenants-->
+  <ion-scroll direction="x" zooming="true" class="shadow-border">
+  <div class="profileSlider">
+      <div class="profileButton" ng-repeat="intervenant in mission.developers" ng-click="toggleCard({{intervenant.id}})" id="{{intervenant.id}}">
+          <img class="profImage" ng-src="img/picture.png"></img>
+          <div class="profil-action" id="links{{intervenant.id}}" style="display:none">
+            <a ng-href="#/app/profil/{{intervenant.id}}" class="action ion-ios-person"></a>
+            <a href="tel:+33627241334" class="action ion-ios-telephone"></a>
+            <a href="mailto:orazio.locchi@gmail.com" class="action ion-ios-email"></a>
+            <p><span ng-bind="intervenant.firstname"></span> <span ng-bind="intervenant.lastname"></span></p>
+          </div>
+      </div>
+      <img ng-src="img/paddingSliderRight.png" style="float:left"></img>
+  </div>
+  </ion-scroll>
+
+
+<div id="phaseListContainer">
+<!--Bouton pour afficher la liste entière de phases-->
+<div id="btnPhases" class="button button-full button-positive" ng-click="showPhases()">Afficher toutes les phases</div>
+<!--Liste de phases-->
+<div style="display: none;" id="phaselist">
+  <div class="list list-inset phaseInList" ng-repeat="phase in mission.phases" ng-click="showPhaseDescription({{phase.id}})">
+    <div class="item item-icon-right"> 
+      <div>
+        <span style="position:absolute; font-weight: bold;" ng-bind="phase.name"></span> <br/>
+        <hr width="100%" color="rgb(39, 131, 1)" size="2px"/> 
+        <p ng-bind="phase.description"></span></p>
+      </div>
+      <i class="icon ion-checkmark-round"></i>
+    </div>
+  </div>
+</div>
+</div>
+
+  </ion-content>
+</ion-view>

@@ -2,13 +2,14 @@
 .body{
 	background-color: #333;
 	color:white;
-	padding: 3vh 5vw;
+	padding: 3vh 3vw;
 }
 
 /* menu */
 .menu{
 	background-color: #efefef;
 	box-shadow: 0 0 5px black;
+	padding-top: 55px;
 }
 
 /* Définition des titres */
@@ -16,7 +17,7 @@ h1, h2, h3, h4, h5, h6{ color:#ddd; }
 h2.name{ 
 	color:#333; 
 	text-align: center;
-	font-size: 6vw;
+	font-size: 30px;
 	margin: 10px 0 20px;
 	text-transform: uppercase;
 	font-weight: lighter;
@@ -25,21 +26,11 @@ h2.name{
 /* style lien */
 a{ text-decoration: none; }
 
-/* paragraphe */
-.section h4, .phases h4{ margin-top: 40px; padding-left: 20px; }
-.section p{
-	text-align: justify;
-	padding: 10px 20px;
-	margin-top: 0px;
-	background-color: #eee;
-	color:#111111;
-}
-
 
 /* Logo */
 img.headWhite{
 	display: block;
-	max-height: 10vh;
+	height: 60px;
 	margin:0 auto 5vh;
 }
 
@@ -83,51 +74,6 @@ img.headWhite{
 	font-size: 20px;
 }
 
-.attached-list{
-	display: inline;
-	margin-right:10px; 
-	position: relative;
-	transition:0.2s;
-}
-.attached-list.show{
-	margin-right:160px; 
-	transition:0.2s;
-}
-
-.profil-action{
-	position: absolute;
-	width: 180px;
-	font-size: 30px;
-	height: 60px;
-	line-height: 60px;
-	padding-left: 10px;
-	vertical-align: top;
-	display: inline;
-	opacity: 0;
-	transition: opacity 0.2s;
-	border: 2px white solid;
-	border-left: 0;
-	left:31px;
-	padding-left: 45px;
-	border-radius: 0 30px 30px 0;  
-	overflow: hidden;
-}
-
-.attached-list.show .profil-action{
-	opacity: 1;
-	transition:0.2s;
-}
-.profil-action a{
-	color: green;
-	margin: 0 15px 0 0;
-}
-
-.profiles-icon{
-	width:150vw;
-	height: 60px;
-	overflow: hidden;
-}
-
 /* cards */
 .card{ display: block; margin:15px 0; position: relative; }
 .card .number{ display: inline-block; width:10%; line-height: 13px; vertical-align: middle; font-size: 10px; }
@@ -148,15 +94,11 @@ img.profil, .img.profil{
 	width: 100%;
 	top:0; left:0;
 }
-.attached{
-	width:60px;
-	display: inline-block!important;
-	border: 2px white solid;
-}
 .card img.profil{ 
 	position: relative;
 	top:0;
 	max-height: 20px;
+	width: 20px;
 	margin:3px 2px;
 }
 .menu .img.profil{
@@ -164,8 +106,8 @@ img.profil, .img.profil{
 	border: 5px rgb(39, 131, 1) solid;
 	box-shadow: 0 0 2px black;
 	margin: 0 auto 0;
-	width: 35vw;
-	height: 35vw;
+	width: 150px;
+	height: 150px;
 }
 
 /* slider */
@@ -196,10 +138,159 @@ img.profil, .img.profil{
 	margin: auto;
 }
 
+					/* PAGE MISSION */
+/* Info button and description*/
+.infoButton{
+	font-size: 40px;
+	color:#0069cc;
+	background-color: black;
+	float:right;
+	max-height: 39px;
+	border-radius: 50%;
+	box-shadow: 0 0 10px 0 black;
+}
+.infoButton:active{
+	color: #990000;
+}
+.description{
+	max-height: 1px;
+	margin-top: 10px;
+	padding: 1px 8px;
+	border-radius: 5px;
+	border-left: solid 5px #006539;
+	background-color: #172e29;
+	color:#e6e6e6;
+	box-shadow: 0 0 5px 0px black;
+	overflow: hidden;
+}
+.description-full{
+	max-height: 500px;
+}
 
+/* Current Phase card*/
+.currentPhase{
+	margin: 2vh 3vw;
+	border-radius: 0px;
+}
 
+/* profile images slider */
+.shadow-border{
+	width: 111%;
+	padding: 5px 5px;
+	left:-3vw;
+	background-color: #404040;
+	box-shadow:  0 0 15px black;
+}
+.profileSlider{
+	width: 600vw;
+}
+.profileButton{
+	width: 70px;
+	float: left;
+	margin-right: 4px;
+	animation-name: popup-back;
+    animation-duration: .5s;
+}
+.profileButton-full{
+	width: 238px;
+	animation-name: popup;
+    animation-duration: .5s;
+}
+.profImage{
+	float: left;
+	border: solid 3px #006080;
+	border-radius: 50%;
+	max-height: 70px;
+	width: 70px;
+	animation-name: getBlue;
+	animation-duration: .5s;
+}
+.profileButton-full .profImage{
+	border: solid 3px #990000;
+	animation-name: getRed;
+	animation-duration: .5s;
+}
+.profil-action{
+	display: none;
+	float: left;
+	font-size: 50px;
+	margin: 0px 5px;
+	padding: 0 5px;
+	border-radius: 7px;
+	background-color: #262626;
+	box-shadow: 0 0 6px 1px black;
+}
+.profil-action p{
+	font-size: 15px;
+	margin: -3px 0 3px 0;
+	text-align: center;
+}
 
+/* Phases*/
+#phaseListContainer{
+	box-shadow: 0 0 6px 1px black;
+	margin:3vh 3vw;
+}
+#btnPhases{
+	margin-bottom: 0;
+}
 
-.coucou{
-	color:red!important;
+#phaselist{
+	margin-top: 0;
+	display: none;
+}
+.phaseInList{
+	border-bottom: solid 1px rgb(100,100,100);
+	padding:0px;
+	margin: 0px;
+	border-radius: 0px;
+}
+.popup-container{
+	background-color: rgba(0,0,0,0.7);
+}
+.popup-head{
+	background-color: #172e29;
+}
+.popup-title{
+	color: #e6e6e6;
+	font-size: 17px;
+}
+.popup-body{
+	font-size: 15px;
+}
+/* Animations */
+@keyframes grow{ /* grow and shrink are for the description but I can't get them to work properly (JS issue) */
+	from{max-height: 1px;}
+	to{max-height: 500px;}
+}
+@keyframes shrink{
+	from{max-height: 500px;}
+	to{max-height: 1px;}
+}
+
+@keyframes appear{ /* appear and disappear are for the three links of each intervenant*/
+	from{opacity: 0;}
+	to{opacity: 1;}
+}
+@keyframes disappear{
+	from{opacity: 1;}
+	to{opacity: 0;}
+}
+
+@keyframes popup{ /* popup and popup-back are for the profileButton of intervenants to grow first before displaying links*/
+	from{width: 70px;}
+	to{width: 235px;}
+}
+@keyframes popup-back{
+	from{width: 235px;}
+	to{width: 70px;}
+}
+
+@keyframes getBlue{ /* for color change of profImage border*/
+	from{border: solid 3px #990000;}
+	to{border: solid 3px #006080;}
+}
+@keyframes getRed{
+	from{border: solid 3px #006080;}
+	to{border: solid 3px #990000;}
 }

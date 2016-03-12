@@ -1,43 +1,23 @@
 angular.module('jeece-mission-app.controllers', ['ionic'])
 
-.controller('AppCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate) {
+.controller('AppCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $http, passFromController) {
   // Si on chope la var "data" dans le stateParams on le fou dans le scope "data".
   $scope.data = angular.fromJson($stateParams.data);
 
-  // Ce que l'API devra nous fournir
-  $scope.missions = [
-    { "name" : "PAREX01", "id" : "1", "profiles" : [
-      {"id": "1", "img" : "http://lorempixel.com/200/200/people/1", "show":"true"},
-      {"id": "5", "img" : "http://lorempixel.com/200/200/people/2", "show":"false"}
-    ], "progress" : {"theory" : "10", "lab" : "39"}, "phase" : { "total":"10", "current":"2", "currentName":"Integration HTML/CSS/JS.", "list":[] } },
-
-    { "name" : "GUILL01", "id" : "2", "profiles" : [
-      {"id": "6", "img" : "http://lorempixel.com/200/200/people/3"},
-      {"id": "2", "img" : "http://lorempixel.com/200/200/people/4"},
-      {"id": "9", "img" : "http://lorempixel.com/200/200/people/1"}
-    ], "progress" : {"theory" : "58", "lab" : "7"}, "phase" : { "total":"12", "current":"7", "currentName":"Traduction des paragraphes 5 à 7." } },
-
-    { "name" : "PAREX02", "id" : "3", "profiles" : [
-      {"id": "3", "img" : "http://lorempixel.com/200/200/people/5"}
-    ], "progress" : {"theory" : "29", "lab" : "90"}, "phase" : { "total":"3", "current":"1", "currentName":"Phase d'analyse" } },
-
-    { "name" : "AUGUS03", "id" : "4", "profiles" : [
-      {"id": "5", "img" : "http://lorempixel.com/200/200/people/6"},
-      {"id": "6", "img" : "http://lorempixel.com/200/200/people/1"},
-      {"id": "2", "img" : "http://lorempixel.com/200/200/people/3"},
-      {"id": "9", "img" : "http://lorempixel.com/200/200/people/7"}
-    ], "progress" : {"theory" : "100", "lab" : "70"}, "phase" : { "total":"9", "current":"3", "currentName":"Réalisation du prototype de la partie laser" } },
-
-    { "name" : "PASTE01", "id" : "5", "profiles" : [
-      {"id": "5", "img" : "http://lorempixel.com/200/200/people/9"},
-      {"id": "2", "img" : "http://lorempixel.com/200/200/people/4"}
-    ], "progress" : {"theory" : "100", "lab" : "100"}, "phase" : { "total":"9", "current":"9", "currentName":"Test" } }
-  ];
+  $http({
+    method: 'GET',
+    url: 'http://dev.jeece.fr:6009/api/missions'
+  }).then(function(response) {
+    $scope.missions = response.data;
+  }, function(response) {
+    alert("problem de get lors du GET")
+  });
+  
 
   // quand on swipe l'element, ca passe a la page suivante avec l'id en parametre
   $scope.showMission = function(missionId){
-    $scope.mission = $scope.missions[missionId - 1];
     $state.go('app.mission', {"id":missionId-1});
+    passFromController.setProperty($scope.missions[missionId - 1].ref);
   };
 
   $scope.showHide = function(item){
@@ -57,26 +37,102 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
 
 })
 
-.controller('missionsCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $http){
-  $scope.missionsList;
+.controller('missionsCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $timeout, $ionicPopup, $http, passFromController){
+
+  //On récupère la mission actuelle et la phase de courrante de la mission
   $http({
     method: 'GET',
-    url: 'http://dev.jeece.fr:6009/api/missions'
+    url: 'http://dev.jeece.fr:6009/api/missions/'+passFromController.getProperty()
   }).then(function(response) {
-    $scope.missionsList = response.data;
+    $scope.mission = response.data[0];
+    var i=0;
+    console.log($scope.mission.phases.length);
+    while(i<$scope.mission.phases.length && $scope.mission.phases[i].finished==true){
+      i++;
+    }
+    if(i<$scope.mission.phases.length)$scope.currentPhase=$scope.mission.phases[i];
   }, function(response) {
     alert("problem de get lors du GET")
   });
+
+  //Pseudo Popups
+
+  $scope.toggleCard = function(intervenantId){ //affichage des 3 liens (profile, tel, mail) de chaque intervenant
+    var myEl = angular.element(document.getElementById(intervenantId));
+    var links = angular.element(document.getElementById("links"+intervenantId));
+
+    if(links.css("display")=="none"){ //quand les liens sont invisibles, on met un timeout après le changement de classe pour un effet visuel sympa
+    myEl.toggleClass("profileButton-full");
+    $timeout(function() {links.css("display","inline");links.css("animation-name","appear");links.css("animation-duration",".5s");}, 500);
+    } 
+    else {//de même pour les faire disparaitre mais inversé
+    links.css("animation-name","disappear");links.css("animation-duration",".5s");
+    $timeout(function(){myEl.toggleClass("profileButton-full");links.css("display","none");}, 500);
+    }
+  };
+
+  $scope.toggleDescription = function(){
+    var myEl = angular.element(document.getElementById("description"));
+    myEl.toggleClass("description-full");
+  };
+
+  $scope.showProfile = function(intervenantId){
+    $scope.intervenant=$scope.intervenants[intervenantId-1];
+    $scope.closeCard(intervenantId);
+    $state.go('app.profile', {"id":intervenantId-1});
+  };
+
+  //Montrer toutes les phases
+  $scope.showPhases = function(){
+    var list = angular.element(document.getElementById("phaselist"));
+    var btn = angular.element(document.getElementById("btnPhases"));
+    if (list.css("display")=='none') 
+    {
+      list.css("display","block");
+      btn.text("Masquer les phases");
+    }
+    else 
+    {
+      list.css("display","none");
+      btn.text("Afficher toutes les phases");
+    }
+  };
+
+  $scope.showPhaseDescription = function(phaseID){
+    var description;var title;
+    if(typeof $scope.mission.phases[phaseID-1] == 'undefined'){
+      title = "Undefined phase"
+      description="Description not available, sorry!";
+    }else{title = $scope.mission.phases[phaseID-1].name;
+      description = $scope.mission.phases[phaseID-1].description;}
+      var alertPopup = $ionicPopup.alert({
+     title: title,
+     template: description
+   });
+  };
+  
 })
 
 
 
-.controller('skillsCtrl',function($scope,$http,$stateParams, $state, $ionicGesture, $ionicSideMenuDelegate){
+.controller('skillsCtrl',function($scope,$http,$stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, passFromController){
   $http({
     method: 'GET',
     url: 'http://dev.jeece.fr:6009/api/skills'
   }).then(function(response) {
     console.log(response.data);
     $scope.skills=response.data;
-  })
-});
+  });
+})
+
+.controller('offersCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $http, passFromController){
+  $http({
+    method: 'GET',
+    url: 'http://dev.jeece.fr:6009/api/missions'
+  }).then(function(response) {
+    console.log(response.data);
+    $scope.missionsList=response.data;
+  });
+})
+
+;
