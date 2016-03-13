@@ -8,7 +8,15 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
     method: 'GET',
     url: 'http://dev.jeece.fr:6009/api/missions'
   }).then(function(response) {
+    var content = angular.element(document.getElementById("content-loading-home"));
+    var spinner = angular.element(document.getElementById("ion-spinner-home"));
+    //Data assignement
     $scope.missions = response.data;
+    //End of Data assignement
+    content.css("display","block");
+    spinner.css("display","none");
+    console.log("Data has finished loading :");
+    console.log($scope.missions);
   }, function(response) {
     alert("problem de get lors du GET")
   });
@@ -44,13 +52,20 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
     method: 'GET',
     url: 'http://dev.jeece.fr:6009/api/missions/'+passFromController.getProperty()
   }).then(function(response) {
+    var content = angular.element(document.getElementById("content-loading-missions"));
+    var spinner = angular.element(document.getElementById("ion-spinner-missions"));
+    //Data assignement
     $scope.mission = response.data[0];
     var i=0;
-    console.log($scope.mission.phases.length);
     while(i<$scope.mission.phases.length && $scope.mission.phases[i].finished==true){
       i++;
     }
     if(i<$scope.mission.phases.length)$scope.currentPhase=$scope.mission.phases[i];
+    //End of Data assignement
+    content.css("display","block");
+    spinner.css("display","none");
+    console.log("Data has finished loading :");
+    console.log($scope.mission);
   }, function(response) {
     alert("problem de get lors du GET")
   });
@@ -120,8 +135,15 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
     method: 'GET',
     url: 'http://dev.jeece.fr:6009/api/skills'
   }).then(function(response) {
-    console.log(response.data);
+    var content = angular.element(document.getElementById("content-loading-skills"));
+    var spinner = angular.element(document.getElementById("ion-spinner-skills"));
+    //Data assignement
     $scope.skills=response.data;
+    //End of Data assignement
+    content.css("display","block");
+    spinner.css("display","none");
+    console.log("Data has finished loading :");
+    console.log($scope.skills);
   });
 })
 
@@ -130,8 +152,15 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
     method: 'GET',
     url: 'http://dev.jeece.fr:6009/api/missions'
   }).then(function(response) {
-    console.log(response.data);
+    var content = angular.element(document.getElementById("content-loading-offers"));
+    var spinner = angular.element(document.getElementById("ion-spinner-offers"));
+    //Data assignement
     $scope.missionsList=response.data;
+    //End of Data assignement
+    content.css("display","block");
+    spinner.css("display","none");
+    console.log("Data has finished loading :");
+    console.log($scope.missionsList);
   });
 })
 

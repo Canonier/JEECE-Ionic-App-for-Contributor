@@ -8,6 +8,9 @@
 <div>
   <h4>Missions en cours</h4>
 </div>
+<ion-spinner id="ion-spinner-home" icon="android" style="margin-top:50px;text-align:center;display:block;"></ion-spinner>
+
+<div id="content-loading-home" style="display:none">
 
 <div ng-click="showMission({{mission.id}})" class="card" ng-repeat="mission in missions">
   <!-- Head -->
@@ -29,6 +32,8 @@
       </div>
     <p class="phase" ng-bind="mission.phases[1].name"></p>
   </div>
+</div>
+
 </div>
 
   </ion-content>

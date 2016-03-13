@@ -1,7 +1,9 @@
 <ion-view>
   <ion-content class="body">
 
-  <div style="position:relative;">
+<ion-spinner id="ion-spinner-missions" icon="android" style="margin-top:50px;text-align:center;display:block;"></ion-spinner>
+
+<div id="content-loading-missions" style="display:none">
 
     <span><h1 style="display:inline" ng-bind="mission.ref"></h1><span ng-click="toggleDescription()" class="infoButton"><i class="icon ion-information-circled"></i></span></span>
     <div class="description" id="description">
@@ -59,6 +61,8 @@
     </div>
   </div>
 </div>
+</div>
+
 </div>
 
   </ion-content>

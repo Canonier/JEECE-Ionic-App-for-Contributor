@@ -4,16 +4,22 @@
   	<div>
   		<h4>Appels d'offre</h4>
   	</div>
+<ion-spinner id="ion-spinner-offers" icon="android" style="margin-top:50px;text-align:center;display:block;"></ion-spinner>
+
+<div id="content-loading-offers" style="display:none">
 
 		<ion-list class="list">
       <ion-item ng-repeat = "mission in missionsList">
       	<div class="row">
       		<div class="col col-30">{{ mission.ref }}</div>
   	    	<div class="col col-65">dmqskdjfaglqmsdlkfjqmsldkfj</div>
-	       	<div class="col ion-ios-arrow-forward"></span>
+	       	<div class="col ion-ios-arrow-forward"></div>
       	</div>
       </ion-item>
     </ion-list>
+
+</div>
+
   </ion-content>
 </ion-view>
 

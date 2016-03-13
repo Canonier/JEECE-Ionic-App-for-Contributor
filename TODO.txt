@@ -1,4 +1,3 @@
 ﻿- Faire Algos pour la progression des missions
 - Icones différentes (checkmark vs croix) et couleurs de barres (verte vs rouge) pour phase de mission (finie vs non finie)
-- Mettre en place un écran de "chargement" : spinner tant que la requête http n'est pas finie
 - Titres à revoir : titre dans ion-view (barre blanche) ou dans le content (dans la page)? si dans la barre blanche revoir les mises en pages pour que l'écran reste "aéré"

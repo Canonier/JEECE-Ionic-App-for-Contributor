@@ -1,9 +1,17 @@
 <ion-view title="Mes compétences">
   <ion-content class="body">
+
+<ion-spinner id="ion-spinner-skills" icon="android" style="margin-top:50px;text-align:center;display:block;"></ion-spinner>
+
+<div id="content-loading-skills" style="display:none">
+	
     <ion-list class="card ">
       <ion-item ng-repeat="skill in skills" ng-bind="skill.name">
       </ion-item>
     </ion-list>
         <button class="button button-balanced button-block"> Ajouter une Compétence </button>
+
+</div>
+
   </ion-content>
 </ion-view>
