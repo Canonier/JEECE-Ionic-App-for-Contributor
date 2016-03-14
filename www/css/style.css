@@ -216,6 +216,9 @@ img.profil, .img.profil{
 	font-size: 50px;
 	margin: 0px 5px;
 	padding: 0 5px;
+	width: 141px;
+	height: 70px;
+	overflow: hidden;
 	border-radius: 7px;
 	background-color: #262626;
 	box-shadow: 0 0 6px 1px black;
