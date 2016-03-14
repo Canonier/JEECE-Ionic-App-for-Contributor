@@ -192,7 +192,7 @@ img.profil, .img.profil{
     animation-duration: .5s;
 }
 .profileButton-full{
-	width: 238px;
+	width: 223px;
 	animation-name: popup;
     animation-duration: .5s;
 }
@@ -279,10 +279,10 @@ img.profil, .img.profil{
 
 @keyframes popup{ /* popup and popup-back are for the profileButton of intervenants to grow first before displaying links*/
 	from{width: 70px;}
-	to{width: 235px;}
+	to{width: 223px;}
 }
 @keyframes popup-back{
-	from{width: 235px;}
+	from{width: 223px;}
 	to{width: 70px;}
 }
 
