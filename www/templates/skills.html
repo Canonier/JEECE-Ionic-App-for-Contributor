@@ -4,13 +4,41 @@
 <ion-spinner id="ion-spinner-skills" icon="android" style="margin-top:50px;text-align:center;display:block;"></ion-spinner>
 
 <div id="content-loading-skills" style="display:none">
-	
-    <ion-list class="card ">
-      <ion-item ng-repeat="skill in skills" ng-bind="skill.name">
-      </ion-item>
-    </ion-list>
-        <button class="button button-balanced button-block"> Ajouter une Compétence </button>
 
+  <ion-header-bar class="bar-positive">
+        <div class="buttons">
+          <button class="button button-icon icon ion-ios-minus-outline"
+            ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+        </div>
+        <h1 class="title">Ionic Delete/Option Buttons</h1>
+        <div class="buttons">
+          <button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">
+              Reorder
+          </button>
+        </div>
+      </ion-header-bar>
+
+  <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+        <ion-item ng-repeat="skill in skills"
+                  item="skill"
+                  href="#" class="item-remove-animate">
+          <span ng-bind="skill.name">Undefined</span>
+          <ion-delete-button class="ion-minus-circled"
+                             ng-click="onItemDelete(skill)">
+          </ion-delete-button>
+          <ion-option-button class="button-assertive"
+                             ng-click="edit(skill)">
+            Edit
+          </ion-option-button>
+          <ion-option-button class="button-calm"
+                             ng-click="share(skill)">
+            Share
+          </ion-option-button>
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(skill, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+
+      </ion-list>
 </div>
 
   </ion-content>
