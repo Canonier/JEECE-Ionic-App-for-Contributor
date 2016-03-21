@@ -21,6 +21,27 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
     alert("problem de get lors du GET")
   });
   
+  $scope.refreshMissions = function(){
+    var content = angular.element(document.getElementById("content-loading-home"));
+    content.css("display","none");
+
+    $http({
+    method: 'GET',
+    url: 'http://dev.jeece.fr:6009/api/missions'
+  }).then(function(response) {
+    //Data assignement
+    $scope.missions = response.data;
+    //End of Data assignement
+    content.css("display","block");
+    console.log("Data has finished loading :");
+    console.log($scope.missions);
+  }, function(response) {
+    alert("problem de get lors du GET")
+  }).finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
 
   // quand on swipe l'element, ca passe a la page suivante avec l'id en parametre
   $scope.showMission = function(missionId){
@@ -45,7 +66,7 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
 
 })
 
-.controller('missionsCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicSideMenuDelegate, $timeout, $ionicPopup, $http, passFromController){
+.controller('missionsCtrl', function($scope, $stateParams, $state, $ionicGesture, $ionicScrollDelegate, $ionicSideMenuDelegate, $timeout, $ionicPopup, $http, passFromController){
 
   //On récupère la mission actuelle et la phase de courrante de la mission
   $http({
@@ -78,12 +99,19 @@ angular.module('jeece-mission-app.controllers', ['ionic'])
 
     if(links.css("display")=="none"){ //quand les liens sont invisibles, on met un timeout après le changement de classe pour un effet visuel sympa
     myEl.toggleClass("profileButton-full");
-    $timeout(function() {links.css("display","inline");links.css("animation-name","appear");links.css("animation-duration",".5s");}, 500);
+
+    //cette partie force la barre de scroll à décaler vers la droite pour les derniers dévelopeurs
+    if(intervenantId==$scope.mission.developers[$scope.mission.developers.length-1].id || intervenantId==$scope.mission.developers[$scope.mission.developers.length-2].id){
+    $ionicScrollDelegate.$getByHandle('profileSlider').scrollBy(153, 0, true);}
+
+    $timeout(function() {links.css("display","inline");links.css("animation-name","appear");links.css("animation-duration",".5s");
+      console.log(intervenantId+1)}, 500);
     } 
     else {//de même pour les faire disparaitre mais inversé
     links.css("animation-name","disappear");links.css("animation-duration",".5s");
     $timeout(function(){myEl.toggleClass("profileButton-full");links.css("display","none");}, 500);
     }
+
   };
 
   $scope.toggleDescription = function(){

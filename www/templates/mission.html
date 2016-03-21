@@ -29,7 +29,7 @@
   </div>
 
   <!--Side-slider des intervenants-->
-  <ion-scroll direction="x" zooming="true" class="shadow-border">
+  <ion-scroll delegate-handle="profileSlider" direction="x" zooming="true" class="shadow-border">
   <div class="profileSlider">
       <div class="profileButton" ng-repeat="intervenant in mission.developers" ng-click="toggleCard({{intervenant.id}})" id="{{intervenant.id}}">
           <img class="profImage" ng-src="img/picture.png"></img>
